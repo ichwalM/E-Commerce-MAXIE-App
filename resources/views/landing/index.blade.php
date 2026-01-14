@@ -104,7 +104,7 @@
                         <!-- Image -->
                         <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative mb-4">
                              @if($product->image_path)
-                                <img src="{{ 'maxie/' . Storage::url($product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                                <img src="{{ Storage::url($product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
                                     <i class="fas fa-image text-3xl"></i>
