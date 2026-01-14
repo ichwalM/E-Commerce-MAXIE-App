@@ -15,6 +15,11 @@ Route::middleware('guest')->group(function () {
     
     Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store']);
+
+    // OTP Verification Routes
+    Route::get('verify-otp', [App\Http\Controllers\Auth\VerifyOtpController::class, 'show'])->name('verification.notice');
+    Route::post('verify-otp', [App\Http\Controllers\Auth\VerifyOtpController::class, 'verify'])->name('verification.verify');
+    Route::post('resend-otp', [App\Http\Controllers\Auth\VerifyOtpController::class, 'resend'])->name('verification.resend');
 });
 
 Route::middleware('auth')->group(function () {

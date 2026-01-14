@@ -25,13 +25,34 @@ class RegisterController extends Controller
             'phone' => 'required_if:role,distributor',
         ]);
 
-        $user = $action->execute($request->all());
 
-        if ($user->is_active) {
-            Auth::login($user);
-            return redirect()->intended('dashboard');
+
+        // Generate OTP
+        $otp = rand(100000, 999999);
+
+        // Store in Temporary Table
+        \App\Models\PendingRegistration::updateOrCreate(
+            ['email' => $request->email], // Update if exists to handle resends before verification
+            [
+                'name' => $request->name,
+                // 'email' is in search criteria
+                'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+                'role' => $request->role,
+                'phone' => $request->phone,
+                'address' => $request->address, // Ensure address is captured if sent
+                'otp' => $otp,
+                'otp_expires_at' => now()->addMinutes(15),
+            ]
+        );
+
+        // Send OTP Email
+        try {
+            \Illuminate\Support\Facades\Mail::to($request->email)->send(new \App\Mail\OtpMail($otp));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Mail Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('login')->with('success', 'Registration successful. Please wait for admin approval.');
+        return redirect()->route('verification.notice', ['email' => $request->email]);
     }
+
 }

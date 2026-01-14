@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // 1. Create Admin
         $admin = User::firstOrCreate(
-            ['email' => 'admin@maxie.id'],
+            ['email' => 'admin@example.com'],
             [
                 'name' => 'Admin Maxie',
                 'password' => Hash::make('password'),
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         // 3. Create Distributor
         $distributor = User::firstOrCreate(
-            ['email' => 'distributor@maxie.id'],
+            ['email' => 'distributor@example.com'],
             [
                 'name' => 'Distributor 1',
                 'password' => Hash::make('password'),
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
 
         // 4. Create Customer
         User::firstOrCreate(
-            ['email' => 'customer@maxie.id'],
+            ['email' => 'customer@example.com'],
             [
                 'name' => 'Customer 1',
                 'password' => Hash::make('password'),

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Maxie Skincare') }}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -126,11 +127,9 @@
                     </div>
                 </div>
                 <div class="relative h-[400px] md:h-full w-full order-1 md:order-2 bg-gray-200">
-                   <!-- Placeholder for a high-quality model shot -->
                    <div class="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-300">
-                       <i class="fas fa-flask text-9xl opacity-20 transform rotate-12"></i>
+                       <img src="{{ asset('images/hero.webp') }}" class="w-full h-full object-cover">
                    </div>
-                   <!-- You would usually put a <img src="..." class="w-full h-full object-cover"> here -->
                 </div>
             </div>
         </div>
