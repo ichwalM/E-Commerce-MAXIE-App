@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingController;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/about', [LandingController::class, 'about'])->name('about');
+Route::get('/shop', [LandingController::class, 'shop'])->name('shop');
+Route::get('/best-sellers', [LandingController::class, 'bestSellers'])->name('best-sellers');
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])->name('register');

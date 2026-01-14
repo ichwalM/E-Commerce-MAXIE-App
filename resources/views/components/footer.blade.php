@@ -17,7 +17,7 @@
                 <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Shop</h4>
                 <ul class="space-y-4 text-sm text-gray-500">
                     <li><a href="#" class="hover:text-black transition">All Products</a></li>
-                    <li><a href="#" class="hover:text-black transition">Best Sellers</a></li>
+                    <li><a href="{{route('best-sellers')}}" class="hover:text-black transition">Best Sellers</a></li>
                     <li><a href="#" class="hover:text-black transition">New Arrivals</a></li>
                     <li><a href="#" class="hover:text-black transition">Bundles</a></li>
                 </ul>
@@ -26,7 +26,7 @@
             <div>
                 <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Company</h4>
                 <ul class="space-y-4 text-sm text-gray-500">
-                    <li><a href="#" class="hover:text-black transition">About Us</a></li>
+                    <li><a href="{{route('about')}}" class="hover:text-black transition">About Us</a></li>
                     <li><a href="#" class="hover:text-black transition">Careers</a></li>
                     <li><a href="#" class="hover:text-black transition">Press</a></li>
                     <li><a href="#" class="hover:text-black transition">Contact</a></li>

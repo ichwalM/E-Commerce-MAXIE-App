@@ -18,6 +18,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
+        "@alpinejs/intersect": "^3.15.4",
         "@fontsource/instrument-sans": "^5.2.8",
         "@fortawesome/fontawesome-free": "^7.1.0",
         "chart.js": "^4.5.1"

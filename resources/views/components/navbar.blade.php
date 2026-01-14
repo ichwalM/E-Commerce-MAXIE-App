@@ -22,9 +22,9 @@
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide uppercase text-gray-500">
                 <a href="{{route('home')}}" class="hover:text-[#99010A] transition">Home</a>
-                <a href="#" class="hover:text-[#99010A] transition">Shop All</a>
-                <a href="#" class="hover:text-[#99010A] transition">Best Sellers</a>
-                <a href="#" class="hover:text-[#99010A] transition">About Us</a>
+                <a href="{{route('shop')}}" class="hover:text-[#99010A] transition">Shop All</a>
+                <a href="{{route('best-sellers')}}" class="hover:text-[#99010A] transition">Best Sellers</a>
+                <a href="{{route('about')}}" class="hover:text-[#99010A] transition">About Us</a>
             </div>
 
             <!-- Icons -->
@@ -69,9 +69,9 @@
     </div>
     <div class="p-6 flex flex-col space-y-6 text-xl font-medium">
         <a href="/" class="block hover:text-[#99010A]">Home</a>
-        <a href="#" class="block hover:text-[#99010A]">Shop All</a>
-        <a href="#" class="block hover:text-[#99010A]">Best Sellers</a>
-        <a href="#" class="block hover:text-[#99010A]">About Us</a>
+        <a href="{{route('shop')}}" class="block hover:text-[#99010A]">Shop All</a>
+        <a href="{{route('best-sellers')}}" class="block hover:text-[#99010A]">Best Sellers</a>
+        <a href="{{route('about')}}" class="block hover:text-[#99010A]">About Us</a>
         <hr class="border-gray-100">
         @auth
             <a href="{{ url('/dashboard') }}" class="block text-base text-gray-500">My Dashboard</a>
