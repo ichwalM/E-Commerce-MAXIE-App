@@ -68,6 +68,30 @@ class DashboardController extends Controller
             ));
         }
 
+        if ($user->role === 'distributor') {
+            // Distributor Monthly Sales Trend (Sales to Customers)
+            $distributorMonthlySales = \App\Models\Order::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, SUM(total_amount) as total')
+                ->where('seller_id', $user->id) // Only this distributor's sales
+                ->where('type', 'customer_purchase')
+                ->where('status', 'completed')
+                ->where('created_at', '>=', now()->subMonths(6))
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'asc')
+                ->orderBy('month', 'asc')
+                ->get();
+
+            $chartDistributorSalesLabels = [];
+            $chartDistributorSalesRevenue = [];
+
+            foreach($distributorMonthlySales as $sale) {
+                $dateObj = \DateTime::createFromFormat('!m', $sale->month);
+                $chartDistributorSalesLabels[] = $dateObj->format('F');
+                $chartDistributorSalesRevenue[] = $sale->total;
+            }
+
+            return view('dashboard', compact('chartDistributorSalesLabels', 'chartDistributorSalesRevenue'));
+        }
+
         return view('dashboard');
     }
 }

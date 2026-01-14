@@ -17,6 +17,56 @@
                     <svg class="w-5 h-5 mr-2 mt-0.5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     <span>Your distribution account is currently <strong>pending approval</strong>. Full access will be granted once an administrator reviews your application.</span>
                 </div>
+
+            @endif
+
+            <!-- Distributor Charts -->
+            @if(Auth::user()->role === 'distributor' && isset($chartDistributorSalesLabels))
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
+                    <h4 class="font-bold text-gray-800 mb-4">My Sales Performance</h4>
+                    <canvas id="mySalesChart" height="150"></canvas>
+                </div>
+                
+                <script type="module">
+                    const ctxMySales = document.getElementById('mySalesChart').getContext('2d');
+                    new Chart(ctxMySales, {
+                        type: 'line',
+                        data: {
+                            labels: @json($chartDistributorSalesLabels),
+                            datasets: [{
+                                label: 'My Sales (IDR)',
+                                data: @json($chartDistributorSalesRevenue),
+                                borderColor: '#99010A',
+                                backgroundColor: 'rgba(153, 1, 10, 0.1)',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                pointBackgroundColor: '#99010A',
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: { color: '#f3f4f6' },
+                                    ticks: {
+                                        callback: function(value) {
+                                            return 'Rp ' + value.toLocaleString('id-ID');
+                                        }
+                                    }
+                                },
+                                x: {
+                                    grid: { display: false }
+                                }
+                            }
+                        }
+                    });
+                </script>
             @endif
         </div>
 
