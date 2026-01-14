@@ -25,84 +25,8 @@
 </head>
 <body class="bg-white text-gray-900 font-sans antialiased selection:bg-[#99010A] selection:text-white" x-data="{ mobileMenuOpen: false, searchOpen: false }">
     
-    <!-- Announcement Bar -->
-    <div class="bg-[#99010A] text-white text-xs font-medium py-2.5 text-center tracking-wide">
-        FREE SHIPPING ON ORDERS OVER 500K IDR • GLOBAL SHIPPING AVAILABLE
-    </div>
-
-    <!-- Normalize Navbar (Standard E-Commerce) -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Mobile Menu Button -->
-                <button type="button" class="md:hidden p-2 text-gray-600 hover:text-black" @click="mobileMenuOpen = !mobileMenuOpen">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-
-                <!-- Logo -->
-                <a href="/" class="flex items-center gap-2 group">
-                    <div class="w-8 h-8 bg-[#99010A] text-white flex items-center justify-center font-bold rounded-sm group-hover:bg-black transition">M</div>
-                    <span class="text-xl font-bold tracking-tighter uppercase">Maxie<span class="font-light text-gray-400">Skincare</span></span>
-                </a>
-
-                <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide uppercase text-gray-500">
-                    <a href="#" class="hover:text-[#99010A] transition">Shop All</a>
-                    <a href="#" class="hover:text-[#99010A] transition">Best Sellers</a>
-                    <a href="#" class="hover:text-[#99010A] transition">Bundles</a>
-                    <a href="#" class="hover:text-[#99010A] transition">About Us</a>
-                </div>
-
-                <!-- Icons -->
-                <div class="flex items-center space-x-5">
-                    <button class="text-gray-600 hover:text-[#99010A] transition" @click="searchOpen = !searchOpen">
-                        <i class="fas fa-search text-lg"></i>
-                    </button>
-                    
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-[#99010A] transition">
-                            <i class="far fa-user text-lg"></i>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-[#99010A] transition font-medium text-sm hidden md:block">
-                            Sign In
-                        </a>
-                    @endauth
-
-                    <a href="#" class="text-gray-600 hover:text-[#99010A] transition relative">
-                        <i class="fas fa-shopping-bag text-lg"></i>
-                        <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#99010A] text-white text-[10px] flex items-center justify-center rounded-full font-bold">0</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Search Overlay -->
-        <div x-show="searchOpen" x-transition.opacity class="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-4 shadow-xl z-40" @click.away="searchOpen = false" x-cloak>
-            <div class="max-w-3xl mx-auto flex items-center gap-4">
-                <i class="fas fa-search text-gray-400"></i>
-                <input type="text" placeholder="Search for products..." class="w-full border-none focus:ring-0 text-lg bg-transparent placeholder-gray-300">
-                <button @click="searchOpen = false" class="text-gray-400 hover:text-black"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div x-show="mobileMenuOpen" class="fixed inset-0 z-40 bg-white" x-transition x-cloak>
-        <div class="p-4 flex justify-between items-center border-b border-gray-100">
-            <span class="font-bold text-lg">MENU</span>
-            <button @click="mobileMenuOpen = false" class="p-2 text-2xl"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="p-6 flex flex-col space-y-6 text-xl font-medium">
-            <a href="#" class="block hover:text-[#99010A]">Shop All</a>
-            <a href="#" class="block hover:text-[#99010A]">Best Sellers</a>
-            <a href="#" class="block hover:text-[#99010A]">Bundles</a>
-            <a href="#" class="block hover:text-[#99010A]">About Us</a>
-            <hr class="border-gray-100">
-            <a href="{{ route('login') }}" class="block text-base text-gray-500">Sign In</a>
-            <a href="{{ route('register') }}" class="block text-base text-gray-500">Create Account</a>
-        </div>
-    </div>
+    <!-- Navbar Component -->
+    <x-navbar />
 
     <!-- Hero Section -->
     <header class="relative bg-[#F9F9F9] overflow-hidden">
@@ -240,63 +164,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="space-y-6">
-                    <span class="text-xl font-bold tracking-tighter uppercase block">Maxie<span class="font-light text-gray-400">Skincare</span></span>
-                    <p class="text-gray-500 text-sm leading-relaxed">
-                        Dedicated to bringing you the best in skincare innovation. Clean, effective, and accessible beauty for everyone.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-[#99010A] transition"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-[#99010A] transition"><i class="fab fa-facebook text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-[#99010A] transition"><i class="fab fa-tiktok text-xl"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Shop</h4>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-black transition">All Products</a></li>
-                        <li><a href="#" class="hover:text-black transition">Best Sellers</a></li>
-                        <li><a href="#" class="hover:text-black transition">New Arrivals</a></li>
-                        <li><a href="#" class="hover:text-black transition">Bundles</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Company</h4>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-black transition">About Us</a></li>
-                        <li><a href="#" class="hover:text-black transition">Careers</a></li>
-                        <li><a href="#" class="hover:text-black transition">Press</a></li>
-                        <li><a href="#" class="hover:text-black transition">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                   <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Customer Care</h4>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-black transition">Shipping & Returns</a></li>
-                        <li><a href="#" class="hover:text-black transition">FAQ</a></li>
-                        <li><a href="#" class="hover:text-black transition">Terms & Conditions</a></li>
-                        <li><a href="#" class="hover:text-black transition">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
-                <p>&copy; {{ date('Y') }} Maxie Skincare. All rights reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <i class="fab fa-cc-visa text-2xl"></i>
-                    <i class="fab fa-cc-mastercard text-2xl"></i>
-                    <i class="fab fa-cc-paypal text-2xl"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Component -->
+    <x-footer />
     
     <style>
         @keyframes fade-in-up {

@@ -1,49 +1,77 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, please verify your email address by entering the 6-digit OTP code we just emailed to you.') }}
-    </div>
+    <div class="flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl border border-gray-100">
+            <div class="text-center">
+                <div class="mx-auto w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-shield-alt text-[#99010A] text-3xl"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 font-heading">Verify Your Email</h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    We've sent a 6-digit code to <span class="font-bold text-gray-900">{{ $email }}</span>
+                </p>
+            </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification code has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
-    
-    @if (session('error'))
-        <div class="mb-4 font-medium text-sm text-red-600">
-            {{ session('error') }}
-        </div>
-    @endif
-    
-    @if (session('success'))
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ session('success') }}
-        </div>
-    @endif
+            @if (session('status') == 'verification-link-sent')
+                <div class="rounded-md bg-green-50 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-green-800">
+                                {{ __('A new code has been sent.') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            
+            @if (session('error'))
+                <div class="rounded-md bg-red-50 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-times-circle text-red-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-red-800">
+                                {{ session('error') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
-    <form method="POST" action="{{ route('verification.verify') }}">
-        @csrf
-        <input type="hidden" name="email" value="{{ $email }}">
-
-        <!-- OTP Code -->
-        <div>
-            <label for="otp" class="block font-medium text-sm text-gray-700">{{ __('Verification Code') }}</label>
-            <input id="otp" class="block mt-1 w-full text-center text-2xl tracking-widest border-gray-300 focus:border-[#99010A] focus:ring-[#99010A] rounded-md shadow-sm" type="text" name="otp" required autofocus placeholder="123456" maxlength="6" />
-            @error('otp') <span class="text-red-600 text-sm mt-2 block">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.resend') }}" class="inline">
+            <form method="POST" action="{{ route('verification.verify') }}" class="mt-8 space-y-6">
                 @csrf
                 <input type="hidden" name="email" value="{{ $email }}">
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#99010A]">
-                    {{ __('Resend Verification Code') }}
-                </button>
-            </form>
 
-            <button type="submit" class="ml-3 inline-flex items-center px-4 py-2 bg-[#99010A] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-800 focus:bg-red-800 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-[#99010A] focus:ring-offset-2 transition ease-in-out duration-150">
-                {{ __('Verify') }}
-            </button>
+                <div>
+                    <label for="otp" class="sr-only">Verification Code</label>
+                    <input id="otp" name="otp" type="text" required class="appearance-none rounded-lg relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-400 text-gray-900 text-center text-3xl tracking-[1em] font-bold focus:outline-none focus:ring-[#99010A] focus:border-[#99010A] focus:z-10 sm:text-lg transition" placeholder="------" maxlength="6" autofocus>
+                </div>
+
+                <div>
+                    <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#99010A] hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#99010A] transition duration-300 button-shadow">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                           <i class="fas fa-check text-red-300 group-hover:text-white transition"></i>
+                        </span>
+                        Verify Email
+                    </button>
+                </div>
+            </form>
+            
+            <div class="text-center">
+                 <form method="POST" action="{{ route('verification.resend') }}">
+                    @csrf
+                    <input type="hidden" name="email" value="{{ $email }}">
+                    <p class="text-sm text-gray-600">
+                        Didn't receive the code? 
+                        <button type="submit" class="font-medium text-[#99010A] hover:text-red-800 transition underline">
+                            Resend Code
+                        </button>
+                    </p>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 </x-guest-layout>
