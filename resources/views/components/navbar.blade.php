@@ -14,14 +14,14 @@
             </button>
 
             <!-- Logo -->
-            <a href="/" class="flex items-center gap-2 group">
+            <a href="{{route('home')}}" class="flex items-center gap-2 group">
                 <div class="w-8 h-8 bg-[#99010A] text-white flex items-center justify-center font-bold rounded-sm group-hover:bg-black transition">M</div>
                 <span class="text-xl font-bold tracking-tighter uppercase">Maxie<span class="font-light text-gray-400">Skincare</span></span>
             </a>
 
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide uppercase text-gray-500">
-                <a href="/" class="hover:text-[#99010A] transition">Home</a>
+                <a href="{{route('home')}}" class="hover:text-[#99010A] transition">Home</a>
                 <a href="#" class="hover:text-[#99010A] transition">Shop All</a>
                 <a href="#" class="hover:text-[#99010A] transition">Best Sellers</a>
                 <a href="#" class="hover:text-[#99010A] transition">About Us</a>

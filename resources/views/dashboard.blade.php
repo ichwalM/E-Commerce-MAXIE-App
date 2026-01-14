@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <div class="space-y-6">
         <!-- Welcome Section -->
