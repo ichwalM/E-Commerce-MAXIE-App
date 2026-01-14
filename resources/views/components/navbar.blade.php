@@ -25,19 +25,19 @@
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide uppercase text-gray-500">
                 <a href="{{route('home')}}" class="hover:text-[#99010A] transition-colors relative group">
-                    Home
+                    {{ __('Home') }}
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#99010A] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="{{route('shop')}}" class="hover:text-[#99010A] transition-colors relative group">
-                    Shop All
+                    {{ __('Shop All') }}
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#99010A] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="{{route('best-sellers')}}" class="hover:text-[#99010A] transition-colors relative group">
-                    Best Sellers
+                    {{ __('Best Sellers') }}
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#99010A] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="{{route('about')}}" class="hover:text-[#99010A] transition-colors relative group">
-                    About Us
+                    {{ __('About Us') }}
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#99010A] transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
@@ -62,6 +62,13 @@
                     <i class="fas fa-shopping-bag text-lg"></i>
                     <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#99010A] text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-sm">0</span>
                 </a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center text-xs font-bold gap-2 border-l border-gray-200 pl-4 ml-2">
+                    <a href="{{ route('lang.switch', 'id') }}" class="{{ app()->getLocale() == 'id' ? 'text-[#99010A]' : 'text-gray-400 hover:text-black' }} transition">ID</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'text-[#99010A]' : 'text-gray-400 hover:text-black' }} transition">EN</a>
+                </div>
             </div>
         </div>
     </div>

@@ -2,9 +2,9 @@
     <!-- Header -->
     <div class="bg-gray-50 pt-32 pb-12">
         <div class="container mx-auto px-6 text-center">
-            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block">Customer Favorites</span>
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 font-serif">Best Sellers</h1>
-            <p class="text-gray-500 mt-4 max-w-xl mx-auto">Our most loved and highly rated products, chosen by you.</p>
+            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block">{{ __('Customer Favorites') }}</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 font-serif">{{ __('Best Sellers') }}</h1>
+            <p class="text-gray-500 mt-4 max-w-xl mx-auto">{{ __('Explore popular') }}</p>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
         @if($products->isEmpty())
              <div class="text-center py-24 bg-gray-50 rounded-lg">
                 <i class="fas fa-box-open text-4xl text-gray-300 mb-4"></i>
-                <p class="text-gray-500">No sales data available yet.</p>
+                <p class="text-gray-500">{{ __('No sales data available yet.') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -21,7 +21,7 @@
                     <div class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300 relative">
                         <!-- Ranking Badge -->
                         <div class="absolute top-4 left-4 z-10 bg-[#99010A] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                            #{{ $index + 1 }} Best Seller
+                            #{{ $index + 1 }} {{ __('Best Seller') }}
                         </div>
 
                         <!-- Image -->
@@ -37,7 +37,7 @@
                             <!-- Overlay Actions -->
                             <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
                                 <a href="{{ route('customer.products.index') }}" class="block w-full py-3 bg-white/90 backdrop-blur text-[#99010A] font-bold text-center rounded-lg hover:bg-[#99010A] hover:text-white transition shadow-lg">
-                                    View Details
+                                    {{ __('View Details') }}
                                 </a>
                             </div>
                         </div>

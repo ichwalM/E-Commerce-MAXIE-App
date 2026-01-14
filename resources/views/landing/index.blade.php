@@ -30,20 +30,19 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 min-h-[600px] items-center">
                 <div class="px-6 py-20 md:px-12 lg:pr-24 order-2 md:order-1 text-center md:text-left" x-data>
-                    <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-4 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">New Arrival</span>
+                    <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-4 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">{{ __('New Arrival') }}</span>
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">
-                        Clean Beauty, <br>
-                        <span class="text-gray-400 font-light italic">Real Results.</span>
+                        {{ __('Clean Beauty, Real Results') }}
                     </h1>
                     <p class="text-gray-500 text-lg mb-8 max-w-md mx-auto md:mx-0 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">
-                        Formulated with clinical precision and natural ingredients to restore your skin's health and vitality.
+                        {{ __('Formulated with clinical') }}
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start reveal-hidden delay-300" x-intersect="$el.classList.add('reveal-visible')">
                         <a href="{{ route('customer.products.index') }}" class="px-10 py-4 bg-[#99010A] text-white font-semibold hover:bg-black transition duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                            Shop Now
+                            {{ __('Shop Now') }}
                         </a>
                         <a href="{{ route('about') }}" class="px-10 py-4 border border-gray-300 hover:border-black font-semibold transition duration-300 hover:bg-gray-50">
-                            Learn More
+                            {{ __('Learn More') }}
                         </a>
                     </div>
                 </div>
@@ -62,23 +61,23 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" x-data>
                 <div class="space-y-2 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-truck text-2xl text-gray-400 mb-2"></i>
-                    <h3 class="font-bold text-sm uppercase tracking-wider">Fast Shipping</h3>
-                    <p class="text-xs text-gray-500">Free delivery over 500k</p>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">{{ __('Fast Shipping') }}</h3>
+                    <p class="text-xs text-gray-500">{{ __('Free delivery') }}</p>
                 </div>
                 <div class="space-y-2 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-leaf text-2xl text-gray-400 mb-2"></i>
-                    <h3 class="font-bold text-sm uppercase tracking-wider">Organic</h3>
-                    <p class="text-xs text-gray-500">100% natural ingredients</p>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">{{ __('Organic') }}</h3>
+                    <p class="text-xs text-gray-500">{{ __('Natural ingredients') }}</p>
                 </div>
                 <div class="space-y-2 reveal-hidden delay-300" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-shield-alt text-2xl text-gray-400 mb-2"></i>
-                    <h3 class="font-bold text-sm uppercase tracking-wider">Secure</h3>
-                    <p class="text-xs text-gray-500">Safe payment processing</p>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">{{ __('Secure') }}</h3>
+                    <p class="text-xs text-gray-500">{{ __('Safe payment') }}</p>
                 </div>
                 <div class="space-y-2 reveal-hidden delay-400" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-headset text-2xl text-gray-400 mb-2"></i>
-                    <h3 class="font-bold text-sm uppercase tracking-wider">Support</h3>
-                    <p class="text-xs text-gray-500">24/7 dedicated support</p>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">{{ __('Support') }}</h3>
+                    <p class="text-xs text-gray-500">{{ __('Dedicated support') }}</p>
                 </div>
             </div>
         </div>
@@ -87,15 +86,15 @@
     <!-- Product Collection -->
     <section id="shop" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16" x-data>
-            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">Selected For You</span>
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">Products</h2>
-            <p class="text-gray-500 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">Explore our most popular formulations designed for radiant skin.</p>
+            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">{{ __('Selected For You') }}</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">{{ __('Products') }}</h2>
+            <p class="text-gray-500 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">{{ __('Explore popular') }}</p>
         </div>
 
         @if($products->isEmpty())
              <div class="text-center py-24 bg-gray-50 rounded-lg">
                 <i class="fas fa-box-open text-4xl text-gray-300 mb-4"></i>
-                <p class="text-gray-500">No products available at the moment.</p>
+                <p class="text-gray-500">{{ __('No products') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
