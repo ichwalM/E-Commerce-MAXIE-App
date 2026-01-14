@@ -29,27 +29,27 @@
     <header class="relative bg-[#F9F9F9] overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 min-h-[600px] items-center">
-                <div class="px-6 py-20 md:px-12 lg:pr-24 order-2 md:order-1 text-center md:text-left">
-                    <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-4 block animate-fade-in-up">New Arrival</span>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.1s">
+                <div class="px-6 py-20 md:px-12 lg:pr-24 order-2 md:order-1 text-center md:text-left" x-data>
+                    <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-4 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">New Arrival</span>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">
                         Clean Beauty, <br>
                         <span class="text-gray-400 font-light italic">Real Results.</span>
                     </h1>
-                    <p class="text-gray-500 text-lg mb-8 max-w-md mx-auto md:mx-0 animate-fade-in-up" style="animation-delay: 0.2s">
+                    <p class="text-gray-500 text-lg mb-8 max-w-md mx-auto md:mx-0 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">
                         Formulated with clinical precision and natural ingredients to restore your skin's health and vitality.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up" style="animation-delay: 0.3s">
-                        <a href="{{ route('customer.products.index') }}" class="px-10 py-4 bg-[#99010A] text-white font-semibold hover:bg-black transition duration-300">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start reveal-hidden delay-300" x-intersect="$el.classList.add('reveal-visible')">
+                        <a href="{{ route('customer.products.index') }}" class="px-10 py-4 bg-[#99010A] text-white font-semibold hover:bg-black transition duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1">
                             Shop Now
                         </a>
-                        <a href="#about" class="px-10 py-4 border border-gray-300 hover:border-black font-semibold transition duration-300">
+                        <a href="{{ route('about') }}" class="px-10 py-4 border border-gray-300 hover:border-black font-semibold transition duration-300 hover:bg-gray-50">
                             Learn More
                         </a>
                     </div>
                 </div>
-                <div class="relative h-[400px] md:h-full w-full order-1 md:order-2 bg-gray-200">
-                   <div class="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-300">
-                       <img src="{{ asset('images/hero.webp') }}" class="w-full h-full object-cover">
+                <div class="relative h-[400px] md:h-full w-full order-1 md:order-2 bg-gray-200 overflow-hidden" x-data>
+                   <div class="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-300 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">
+                       <img src="{{ asset('images/hero.webp') }}" class="w-full h-full object-cover hover:scale-105 transition duration-1000 ease-in-out">
                    </div>
                 </div>
             </div>
@@ -59,23 +59,23 @@
     <!-- Value Propositions -->
     <section class="border-y border-gray-100 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="space-y-2">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" x-data>
+                <div class="space-y-2 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-truck text-2xl text-gray-400 mb-2"></i>
                     <h3 class="font-bold text-sm uppercase tracking-wider">Fast Shipping</h3>
                     <p class="text-xs text-gray-500">Free delivery over 500k</p>
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-2 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-leaf text-2xl text-gray-400 mb-2"></i>
                     <h3 class="font-bold text-sm uppercase tracking-wider">Organic</h3>
                     <p class="text-xs text-gray-500">100% natural ingredients</p>
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-2 reveal-hidden delay-300" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-shield-alt text-2xl text-gray-400 mb-2"></i>
                     <h3 class="font-bold text-sm uppercase tracking-wider">Secure</h3>
                     <p class="text-xs text-gray-500">Safe payment processing</p>
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-2 reveal-hidden delay-400" x-intersect="$el.classList.add('reveal-visible')">
                     <i class="fas fa-headset text-2xl text-gray-400 mb-2"></i>
                     <h3 class="font-bold text-sm uppercase tracking-wider">Support</h3>
                     <p class="text-xs text-gray-500">24/7 dedicated support</p>
@@ -86,10 +86,10 @@
 
     <!-- Product Collection -->
     <section id="shop" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block">Selected For You</span>
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Best Sellers</h2>
-            <p class="text-gray-500">Explore our most popular formulations designed for radiant skin.</p>
+        <div class="text-center max-w-3xl mx-auto mb-16" x-data>
+            <span class="text-[#99010A] font-bold tracking-widest uppercase text-xs mb-3 block reveal-hidden" x-intersect="$el.classList.add('reveal-visible')">Selected For You</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 reveal-hidden delay-100" x-intersect="$el.classList.add('reveal-visible')">Products</h2>
+            <p class="text-gray-500 reveal-hidden delay-200" x-intersect="$el.classList.add('reveal-visible')">Explore our most popular formulations designed for radiant skin.</p>
         </div>
 
         @if($products->isEmpty())
@@ -98,44 +98,26 @@
                 <p class="text-gray-500">No products available at the moment.</p>
             </div>
         @else
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
-                @foreach($products as $product)
-                    <div class="group relative">
-                        <!-- Image -->
-                        <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative mb-4">
-                             @if($product->image_path)
-                                <img src="{{ Storage::url($product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                @foreach($products as $index => $product)
+                <!-- Product Card -->
+                    <a  href="{{ route('shop') }}" class="group cursor-pointer reveal-hidden delay-{{ ($index % 3) * 100 + 100 }}" x-data x-intersect="$el.classList.add('reveal-visible')">
+                        <div class="relative overflow-hidden bg-gray-100 aspect-[4/5] mb-4 rounded-sm">
+                            @if($product->image_path)
+                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
                             @else
-                                <div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
+                                <div class="w-full h-full flex items-center justify-center text-gray-300">
                                     <i class="fas fa-image text-3xl"></i>
                                 </div>
                             @endif
                             
-                            <!-- Overlay Action -->
-                            <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
-                                <a href="{{ route('customer.products.index') }}" class="block w-full bg-white text-black font-semibold py-3 text-sm hover:bg-[#99010A] hover:text-white transition shadow-lg text-center">
-                                    Shop Now
-                                </a>
-                            </div>
-                            
-                            <!-- Badges -->
-                            <div class="absolute top-3 left-3 flex flex-col gap-2">
-                                <span class="bg-white/90 backdrop-blur text-[10px] font-bold px-2 py-1 uppercase tracking-wide">New</span>
+                            <div class="p-4">
+                                <h3 class="font-bold text-sm uppercase tracking-wider">{{ $product->name }}</h3>
+                                <p class="text-sm text-gray-500">{{ Str::limit($product->description, 40) }}</p>
+                                <p class="text-sm font-bold text-[#99010A] mt-2">Rp {{ number_format($product->price_retail, 0, ',', '.') }}</p>
                             </div>
                         </div>
-                        
-                        <!-- Info -->
-                        <div class="space-y-1 text-center">
-                            <h3 class="text-base font-medium text-gray-900">
-                                <a href="{{ route('customer.products.index') }}" class="hover:text-[#99010A] transition">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    {{ $product->name }}
-                                </a>
-                            </h3>
-                            <p class="text-sm text-gray-500">{{ Str::limit($product->description, 40) }}</p>
-                            <p class="text-sm font-bold text-[#99010A] mt-2">Rp {{ number_format($product->price_retail, 0, ',', '.') }}</p>
-                        </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         @endif
