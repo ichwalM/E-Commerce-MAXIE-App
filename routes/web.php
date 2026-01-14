@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/distributors', [App\Http\Controllers\Admin\DistributorController::class, 'index'])->name('distributors.index');
         Route::post('/distributors/{user}/approve', [App\Http\Controllers\Admin\DistributorController::class, 'approve'])->name('distributors.approve');
+        Route::post('/distributors/{user}/reject', [App\Http\Controllers\Admin\DistributorController::class, 'reject'])->name('distributors.reject');
+        Route::patch('/distributors/{user}/deactivate', [App\Http\Controllers\Admin\DistributorController::class, 'deactivate'])->name('distributors.deactivate');
         
         Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
         

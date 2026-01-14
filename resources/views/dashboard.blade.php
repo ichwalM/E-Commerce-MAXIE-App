@@ -36,9 +36,15 @@
                 </div>
 
                 <!-- Distributor Performance Chart -->
-                <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                    <h4 class="font-bold text-gray-800 mb-4">Distributor Sales Performance</h4>
-                    <canvas id="distributorChart" height="120"></canvas>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-gray-800 mb-4">Distributor Leaderboard</h4>
+                    <canvas id="distributorChart" height="200"></canvas>
+                </div>
+
+                <!-- Monthly Sales Trend Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-gray-800 mb-4">Monthly Revenue Trend</h4>
+                    <canvas id="monthlyChart" height="200"></canvas>
                 </div>
             </div>
 
@@ -76,7 +82,7 @@
                 </div>
             </div>
             
-            <script>
+            <script type="module">
                 const ctx = document.getElementById('distributorChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
@@ -99,6 +105,46 @@
                             y: {
                                 beginAtZero: true,
                                 grid: { color: '#f3f4f6' }
+                            },
+                            x: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+
+                // Monthly Sales Chart
+                const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
+                new Chart(ctxMonthly, {
+                    type: 'line',
+                    data: {
+                        labels: @json($chartMonthlyLabels),
+                        datasets: [{
+                            label: 'Revenue (IDR)',
+                            data: @json($chartMonthlyRevenue),
+                            borderColor: '#99010A',
+                            backgroundColor: 'rgba(153, 1, 10, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                            pointBackgroundColor: '#99010A',
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f3f4f6' },
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'Rp ' + value.toLocaleString('id-ID');
+                                    }
+                                }
                             },
                             x: {
                                 grid: { display: false }

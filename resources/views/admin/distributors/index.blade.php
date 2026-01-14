@@ -47,14 +47,32 @@
                                         <td class="py-2 px-4 border-b">{{ $distributor->created_at->format('d M Y') }}</td>
                                         <td class="py-2 px-4 border-b">
                                             @if(!$distributor->is_active)
-                                                <form action="{{ route('admin.distributors.approve', $distributor->id) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="text-white bg-[#99010A] hover:bg-red-800 px-3 py-1 rounded text-sm">
-                                                        Approve
-                                                    </button>
-                                                </form>
+                                                <div class="flex gap-2">
+                                                    <form action="{{ route('admin.distributors.approve', $distributor->id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="text-white bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm transition">
+                                                            Approve
+                                                        </button>
+                                                    </form>
+                                                    
+                                                    <form action="{{ route('admin.distributors.reject', $distributor->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to reject and remove this application?');">
+                                                        @csrf
+                                                        <button type="submit" class="text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm transition">
+                                                            Reject
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             @else
-                                                <span class="text-gray-400">Approved</span>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-green-600 font-semibold text-sm">Approved</span>
+                                                    <form action="{{ route('admin.distributors.deactivate', $distributor->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to deactivate this distributor?');">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="text-white bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded text-xs transition">
+                                                            Deactivate
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             @endif
                                         </td>
                                     </tr>

@@ -39,7 +39,7 @@
                         Formulated with clinical precision and natural ingredients to restore your skin's health and vitality.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up" style="animation-delay: 0.3s">
-                        <a href="#shop" class="px-10 py-4 bg-[#99010A] text-white font-semibold hover:bg-black transition duration-300">
+                        <a href="{{ route('customer.products.index') }}" class="px-10 py-4 bg-[#99010A] text-white font-semibold hover:bg-black transition duration-300">
                             Shop Now
                         </a>
                         <a href="#about" class="px-10 py-4 border border-gray-300 hover:border-black font-semibold transition duration-300">
@@ -113,9 +113,9 @@
                             
                             <!-- Overlay Action -->
                             <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
-                                <button class="w-full bg-white text-black font-semibold py-3 text-sm hover:bg-[#99010A] hover:text-white transition shadow-lg">
-                                    Quick Add
-                                </button>
+                                <a href="{{ route('customer.products.index') }}" class="block w-full bg-white text-black font-semibold py-3 text-sm hover:bg-[#99010A] hover:text-white transition shadow-lg text-center">
+                                    Shop Now
+                                </a>
                             </div>
                             
                             <!-- Badges -->
@@ -127,7 +127,7 @@
                         <!-- Info -->
                         <div class="space-y-1 text-center">
                             <h3 class="text-base font-medium text-gray-900">
-                                <a href="#" class="hover:text-[#99010A] transition">
+                                <a href="{{ route('customer.products.index') }}" class="hover:text-[#99010A] transition">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
                                     {{ $product->name }}
                                 </a>
@@ -141,7 +141,7 @@
         @endif
         
         <div class="text-center mt-16">
-            <a href="#" class="inline-block border-b-2 border-black pb-1 font-semibold hover:text-[#99010A] hover:border-[#99010A] transition">View All Products</a>
+            <a href="{{ route('customer.products.index') }}" class="inline-block border-b-2 border-black pb-1 font-semibold hover:text-[#99010A] hover:border-[#99010A] transition">View All Products</a>
         </div>
     </section>
 
