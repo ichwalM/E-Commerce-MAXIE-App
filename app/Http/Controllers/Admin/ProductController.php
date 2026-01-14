@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\ProductStock;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductController extends Controller
 {
@@ -36,7 +38,18 @@ class ProductController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('image'));
+            
+            // Encode to WebP with 80% quality
+            $encoded = $image->toWebp(80);
+            
+            // Generate filename
+            $filename = 'products/' . Str::random(40) . '.webp';
+            
+            // Save to storage
+            Storage::disk('public')->put($filename, (string) $encoded);
+            $imagePath = $filename;
         }
 
         $product = Product::create([
@@ -77,7 +90,15 @@ class ProductController extends Controller
             if ($product->image_path) {
                 Storage::disk('public')->delete($product->image_path);
             }
-            $product->image_path = $request->file('image')->store('products', 'public');
+            
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('image'));
+            
+            $encoded = $image->toWebp(80);
+            $filename = 'products/' . Str::random(40) . '.webp';
+            
+            Storage::disk('public')->put($filename, (string) $encoded);
+            $product->image_path = $filename;
         }
 
         $product->update([
