@@ -7,12 +7,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ExportSalesAction
 {
-    public function execute()
+    public function execute($startDate = null, $endDate = null)
     {
-        $orders = Order::where('seller_id', Auth::id())
+        $query = Order::where('seller_id', Auth::id())
             ->where('status', 'completed')
-            ->with(['buyer', 'items.product'])
-            ->get();
+            ->with(['buyer', 'items.product']);
+
+        if ($startDate) {
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+
+        $orders = $query->get();
 
         $filename = "sales_report_" . date('Ymd_His') . ".csv";
         $handle = fopen('php://temp', 'r+');

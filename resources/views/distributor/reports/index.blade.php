@@ -9,11 +9,30 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    
+                    <!-- Filter Section -->
+                    <form method="GET" action="{{ route('distributor.reports.index') }}" class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-wrap gap-4 items-end">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Start Date</label>
+                            <input type="date" name="start_date" value="{{ $startDate }}" class="rounded-md border-gray-300 shadow-sm focus:border-[#99010A] focus:ring-[#99010A]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">End Date</label>
+                            <input type="date" name="end_date" value="{{ $endDate }}" class="rounded-md border-gray-300 shadow-sm focus:border-[#99010A] focus:ring-[#99010A]">
+                        </div>
+                        <div class="flex gap-2">
+                             <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-black transition">
+                                Filter Report
+                             </button>
+                             <a href="{{ route('distributor.reports.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center gap-2">
+                                <i class="fas fa-file-excel"></i> Export Excel
+                             </a>
+                        </div>
+                    </form>
+
                     <div class="flex justify-between items-center mb-6">
                          <h3 class="text-lg font-bold text-[#99010A]">Performance Overview</h3>
-                         <a href="{{ route('distributor.reports.export') }}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                             Download CSV
-                         </a>
+                         <span class="text-sm text-gray-500">Period: {{ \Carbon\Carbon::parse($startDate)->format('d M Y') }} - {{ \Carbon\Carbon::parse($endDate)->format('d M Y') }}</span>
                     </div>
                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -31,7 +50,7 @@
                         </div>
                     </div>
 
-                    <h3 class="text-lg font-bold mb-4">Recent Sales</h3>
+                    <h3 class="text-lg font-bold mb-4">Detailed Sales History</h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white border border-gray-300">
                             <thead>
@@ -44,17 +63,22 @@
                             </thead>
                             <tbody>
                                 @foreach($recentSales as $sale)
-                                    <tr>
+                                    <tr class="hover:bg-gray-50 transition">
                                         <td class="py-2 px-4 border-b font-mono text-sm">{{ $sale->invoice_no }}</td>
-                                        <td class="py-2 px-4 border-b">{{ $sale->created_at->format('d M Y') }}</td>
-                                        <td class="py-2 px-4 border-b">{{ $sale->buyer->name }}</td>
-                                        <td class="py-2 px-4 border-b font-bold">Rp {{ number_format($sale->total_amount, 0, ',', '.') }}</td>
+                                        <td class="py-2 px-4 border-b">{{ $sale->created_at->format('d M Y H:i') }}</td>
+                                        <td class="py-2 px-4 border-b">
+                                            <div class="font-bold">{{ $sale->buyer->name }}</div>
+                                            <div class="text-xs text-gray-500">{{ ucfirst($sale->buyer->role) }}</div>
+                                        </td>
+                                        <td class="py-2 px-4 border-b font-bold text-[#99010A]">Rp {{ number_format($sale->total_amount, 0, ',', '.') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         @if($recentSales->isEmpty())
-                            <div class="text-center py-4 text-gray-500">No completed sales yet.</div>
+                            <div class="text-center py-12 bg-gray-50 border border-t-0 border-gray-300 rounded-b-lg">
+                                <p class="text-gray-500">No sales records found for this period.</p>
+                            </div>
                         @endif
                     </div>
 
