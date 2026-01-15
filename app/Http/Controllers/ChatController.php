@@ -16,7 +16,7 @@ class ChatController extends Controller
         $userId = Auth::id();
         $conversations = Conversation::whereHas('participants', function ($q) use ($userId) {
             $q->where('user_id', $userId);
-        })->with(['participants.user', 'messages' => function($q) {
+        })->with(['participants', 'messages' => function($q) {
             $q->latest()->limit(1);
         }])->orderBy('updated_at', 'desc')->get();
 
@@ -26,11 +26,11 @@ class ChatController extends Controller
     public function show(Conversation $conversation)
     {
         // Ensure user is participant
-        if (!$conversation->participants->contains('user_id', Auth::id())) {
+        if (!$conversation->participants->contains('id', Auth::id())) {
             abort(403);
         }
 
-        $conversation->load(['messages.sender', 'participants.user']);
+        $conversation->load(['messages.sender', 'participants']);
         
         // Mark messages as read (simplified)
         $conversation->messages()->where('sender_id', '!=', Auth::id())
@@ -70,5 +70,35 @@ class ChatController extends Controller
         $message = $action->execute(Auth::id(), $request->recipient_id, $request->body);
 
         return redirect()->route('chat.show', $message->conversation_id);
+    }
+
+    public function selectRecipient(Request $request)
+    {
+        $query = $request->input('search');
+        $role = Auth::user()->role;
+        
+        $usersQuery = User::query();
+
+        if ($role === 'customer') {
+            // Customer can chat with Distributors
+             $usersQuery->where('role', 'distributor');
+        } elseif ($role === 'distributor') {
+             // Distributor can chat with Admins and Customers (normally customers contact them, but for now allow Admin)
+             $usersQuery->where('role', 'admin');
+        } elseif ($role === 'admin') {
+            // Admin can chat with Distributors
+             $usersQuery->where('role', 'distributor');
+        }
+
+        if ($query) {
+            $usersQuery->where(function($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%")
+                  ->orWhere('email', 'like', "%{$query}%");
+            });
+        }
+
+        $users = $usersQuery->limit(20)->get();
+
+        return view('chat.select-recipient', compact('users', 'query'));
     }
 }

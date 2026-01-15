@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Messages') }}
+        <h2 class="font-semibold text-xl italic text-gray-800 leading-tight">
+            {{ __('Messages (BETA)') }}
         </h2>
     </x-slot>
 
@@ -9,12 +9,17 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold mb-4 text-[#99010A]">Conversations</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-[#99010A]">Conversations</h3>
+                        <a href="{{ route('chat.new') }}" class="px-4 py-2 bg-[#99010A] text-white rounded-lg text-sm hover:bg-black transition font-bold">
+                            + New Message
+                        </a>
+                    </div>
                     
                     <div class="space-y-4">
                         @foreach($conversations as $conversation)
                             @php
-                                $otherParticipant = $conversation->participants->where('user_id', '!=', Auth::id())->first()->user;
+                                $otherParticipant = $conversation->participants->where('id', '!=', Auth::id())->first();
                                 $lastMessage = $conversation->messages->first();
                             @endphp
                             <a href="{{ route('chat.show', $conversation->id) }}" class="block border rounded-lg p-4 hover:bg-gray-50 transition">

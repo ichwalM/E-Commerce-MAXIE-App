@@ -4,7 +4,7 @@
              <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col flex-1 h-full">
                 <!-- Header -->
                 @php
-                    $otherParticipant = $conversation->participants->where('user_id', '!=', Auth::id())->first()->user;
+                    $otherParticipant = $conversation->participants->where('id', '!=', Auth::id())->first();
                 @endphp
                 <div class="p-4 border-b bg-[#FEFBEC] flex justify-between items-center">
                     <div>

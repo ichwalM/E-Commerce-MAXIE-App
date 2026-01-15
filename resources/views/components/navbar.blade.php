@@ -58,10 +58,10 @@
                     </a>
                 @endauth
 
-                <a href="#" class="text-gray-600 hover:text-[#99010A] transition-transform hover:scale-110 relative">
+                <!-- <a href="#" class="text-gray-600 hover:text-[#99010A] transition-transform hover:scale-110 relative">
                     <i class="fas fa-shopping-bag text-lg"></i>
                     <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#99010A] text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-sm">0</span>
-                </a>
+                </a> -->
 
                 <!-- Language Switcher -->
                 <div class="flex items-center text-xs font-bold gap-2 border-l border-gray-200 pl-4 ml-2">

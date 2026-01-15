@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['auth'])->name('chat.')->group(function () {
         Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('index');
+        Route::get('/chat/new', [App\Http\Controllers\ChatController::class, 'selectRecipient'])->name('new');
         Route::get('/chat/create/{user}', [App\Http\Controllers\ChatController::class, 'create'])->name('create');
         Route::get('/chat/{conversation}', [App\Http\Controllers\ChatController::class, 'show'])->name('show');
         Route::post('/chat', [App\Http\Controllers\ChatController::class, 'store'])->name('store');
