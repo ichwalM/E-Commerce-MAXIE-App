@@ -17,9 +17,20 @@ class LandingController extends Controller
         return view('landing.about');
     }
 
-    public function shop()
+    public function shop(Request $request)
     {
-        $products = \App\Models\Product::where('is_active', true)->orderBy('name')->paginate(12);
+        $query = \App\Models\Product::where('is_active', true);
+
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        $products = $query->orderBy('name')->paginate(12)->withQueryString();
+        
         return view('landing.shop', compact('products'));
     }
 

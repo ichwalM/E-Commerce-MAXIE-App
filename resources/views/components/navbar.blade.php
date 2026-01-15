@@ -77,7 +77,9 @@
     <div x-show="searchOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-4 shadow-xl z-40" @click.away="searchOpen = false" x-cloak>
         <div class="max-w-3xl mx-auto flex items-center gap-4">
             <i class="fas fa-search text-gray-400"></i>
-            <input type="text" placeholder="Search for products..." class="w-full border-none focus:ring-0 text-lg bg-transparent placeholder-gray-300">
+            <form action="{{ route('shop') }}" method="GET" class="flex-1">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search for products..." class="w-full border-none focus:ring-0 text-lg bg-transparent placeholder-gray-300" autofocus>
+            </form>
             <button @click="searchOpen = false" class="text-gray-400 hover:text-black transition-transform hover:rotate-90"><i class="fas fa-times"></i></button>
         </div>
     </div>
