@@ -3450,3 +3450,13 @@
 #69 D:/Projects/E-Commerce-Maxie-App/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('D://Projects//E-C...')
 #70 {main}
 "} 
+[2026-01-15 03:38:28] local.ERROR: Gemini API Error: {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+  
+[2026-01-15 03:38:28] local.ERROR: Gemini Service Exception: Failed to communicate with AI service.  
+[2026-01-15 03:38:28] local.ERROR: AI Generation Error: Failed to communicate with AI service.  

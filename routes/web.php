@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/stock', [App\Http\Controllers\Admin\StockController::class, 'update'])->name('stock.update');
         
         Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->only(['index', 'show', 'update']);
+        
+        Route::post('/ai/generate', [App\Http\Controllers\Admin\AiController::class, 'generate'])->name('ai.generate');
     });
 
     Route::middleware(['auth'])->prefix('distributor')->name('distributor.')->group(function () {

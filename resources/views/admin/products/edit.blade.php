@@ -52,7 +52,31 @@
                                     <img src="{{ asset('storage/' . $product->image_path) }}" class="h-20 w-20 object-cover rounded border">
                                 </div>
                             @endif
-                            <input type="file" name="image" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <input type="file" name="image" id="imageInput" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                        
+                             <!-- Gemini AI Integration -->
+                            <div class="mt-2 flex items-center gap-4">
+                                <button type="button" onclick="generateAdContent()" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:from-blue-600 hover:to-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150" id="aiBtn">
+                                    <span class="mr-2">✨</span> Generate Description
+                                </button>
+                                <span id="aiStatus" class="text-sm text-gray-500 hidden">Analyzing image with AI...</span>
+                            </div>
+
+                            <!-- AI Result Container -->
+                            <div id="aiResult" class="mt-4 p-4 bg-purple-50 rounded-lg border border-purple-100 hidden">
+                                <h3 class="font-bold text-purple-800 mb-2">AI Suggestion:</h3>
+                                <div class="grid gap-2 text-sm">
+                                    <div>
+                                        <span class="font-bold">Headline:</span> <span id="aiHeadline" class="text-gray-700"></span>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold">Hashtags:</span> <span id="aiHashtags" class="text-blue-600"></span>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="applyAiContent()" class="mt-3 text-xs text-purple-700 hover:text-purple-900 font-bold underline">
+                                    Use in Description
+                                </button>
+                            </div>
                         </div>
 
                         <div class="flex justify-end gap-2 mt-6">
@@ -64,4 +88,66 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function generateAdContent() {
+            const fileInput = document.getElementById('imageInput');
+            const status = document.getElementById('aiStatus');
+            const btn = document.getElementById('aiBtn');
+            const resultBox = document.getElementById('aiResult');
+            
+            if (fileInput.files.length === 0) {
+                alert('Please select an image first.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+            formData.append('_token', '{{ csrf_token() }}');
+
+            status.classList.remove('hidden');
+            btn.disabled = true;
+            resultBox.classList.add('hidden');
+
+            fetch('{{ route("admin.ai.generate") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const content = data.data;
+                    document.getElementById('aiHeadline').innerText = content.headline;
+                    document.getElementById('aiHashtags').innerText = content.hashtags.join(' ');
+                    
+                    // Store description for later use
+                    window.generatedDescription = content.description;
+                    
+                    resultBox.classList.remove('hidden');
+                } else {
+                    alert('AI Error: ' + (data.message || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Something went wrong. Check console.');
+            })
+            .finally(() => {
+                status.classList.add('hidden');
+                btn.disabled = false;
+            });
+        }
+
+        function applyAiContent() {
+            const headline = document.getElementById('aiHeadline').innerText;
+            const hashtags = document.getElementById('aiHashtags').innerText;
+            const description = window.generatedDescription || '';
+            
+            const fullText = `${headline}\n\n${description}\n\n${hashtags}`;
+            
+            const textarea = document.querySelector('textarea[name="description"]');
+            textarea.value = fullText;
+            textarea.focus();
+        }
+    </script>
 </x-app-layout>
