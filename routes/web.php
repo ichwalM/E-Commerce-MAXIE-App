@@ -10,6 +10,7 @@ use App\Http\Controllers\LandingController;
 Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/shop', [LandingController::class, 'shop'])->name('shop');
+Route::get('/product/{product:slug}', [LandingController::class, 'show'])->name('product.show');
 Route::get('/best-sellers', [LandingController::class, 'bestSellers'])->name('best-sellers');
 Route::get('lang/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'id'])) {

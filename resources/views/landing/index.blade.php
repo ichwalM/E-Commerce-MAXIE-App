@@ -100,7 +100,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 @foreach($products as $index => $product)
                 <!-- Product Card -->
-                    <a  href="{{ route('shop') }}" class="group cursor-pointer reveal-hidden delay-{{ ($index % 3) * 100 + 100 }}" x-data x-intersect="$el.classList.add('reveal-visible')">
+                    <a  href="{{ route('product.show', $product->slug) }}" class="group cursor-pointer reveal-hidden delay-{{ ($index % 3) * 100 + 100 }}" x-data x-intersect="$el.classList.add('reveal-visible')">
                         <div class="relative overflow-hidden bg-gray-100 aspect-[4/5] mb-4 rounded-sm">
                             @if($product->image_path)
                                 <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
@@ -110,12 +110,16 @@
                                 </div>
                             @endif
                             
-                            <div class="p-4">
-                                <h3 class="font-bold text-sm uppercase tracking-wider">{{ $product->name }}</h3>
-                                <p class="text-sm text-gray-500">{{ Str::limit($product->description, 40) }}</p>
-                                <p class="text-sm font-bold text-[#99010A] mt-2">Rp {{ number_format($product->price_retail, 0, ',', '.') }}</p>
+                            <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
+                                <span class="block w-full py-2 bg-white/90 backdrop-blur text-[#99010A] font-bold text-center text-xs uppercase tracking-widest rounded-sm hover:bg-[#99010A] hover:text-white transition shadow-lg">
+                                    {{ __('View Details') }}
+                                </span>
                             </div>
                         </div>
+                        
+                        <h3 class="font-bold text-sm uppercase tracking-wider">{{ $product->name }}</h3>
+                        <p class="text-sm text-gray-500">{{ Str::limit($product->description, 40) }}</p>
+                        <p class="text-sm font-bold text-[#99010A] mt-2">Rp {{ number_format($product->price_retail, 0, ',', '.') }}</p>
                     </a>
                 @endforeach
             </div>

@@ -23,6 +23,22 @@ class LandingController extends Controller
         return view('landing.shop', compact('products'));
     }
 
+    public function show(\App\Models\Product $product)
+    {
+        if (!$product->is_active) {
+            abort(404);
+        }
+        
+        // Load related products (random for now, or same category if categories existed)
+        $relatedProducts = \App\Models\Product::where('is_active', true)
+            ->where('id', '!=', $product->id)
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('landing.product', compact('product', 'relatedProducts'));
+    }
+
     public function bestSellers()
     {
         // Get products ordered by total quantity sold in completed customer purchases

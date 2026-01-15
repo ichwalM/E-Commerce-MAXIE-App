@@ -31,7 +31,7 @@
                             
                             <!-- Overlay Actions -->
                             <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
-                                <a href="{{ route('customer.products.index') }}" class="block w-full py-3 bg-white/90 backdrop-blur text-[#99010A] font-bold text-center rounded-lg hover:bg-[#99010A] hover:text-white transition shadow-lg">
+                                <a href="{{ route('product.show', $product->slug) }}" class="block w-full py-3 bg-white/90 backdrop-blur text-[#99010A] font-bold text-center rounded-lg hover:bg-[#99010A] hover:text-white transition shadow-lg">
                                     {{ __('View Details') }}
                                 </a>
                             </div>
